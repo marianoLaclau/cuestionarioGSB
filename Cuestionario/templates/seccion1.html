@@ -16,25 +16,23 @@
     {% endfor %}
 {% endif %}
 
-{% if pregunta_actual %}
-    <div class="form-contenedor">
-        <h3>{{ pregunta_actual.texto }}</h3>
-        <form id="question-form" method="post" action="{% url 'procesar_respuesta' seccion_id=seccion.id %}">
-            {% csrf_token %}
-            <input type="hidden" name="pregunta_id" value="{{ pregunta_actual.id }}">
-            
-            {% for respuesta in respuestas %}
-                <input type="radio" id="respuesta_{{ respuesta.id }}" name="respuesta" value="{{ respuesta.id }}">
-                <label for="respuesta_{{ respuesta.id }}">{{ respuesta.texto }}</label><br>
-            {% endfor %}
-            <br><br><br>
-            <center><button class="btn btn-secondary" type="submit">Siguiente</button></center>
-        </form>
-    </div>
-{% else %}
-    <p>¡Has completado todas las preguntas!</p>
-    <p>Puntaje total: {{ puntaje_total }}</p>
-{% endif %}
+
+
+<div class="form-contenedor">
+    <h3>{{ pregunta_actual.texto }}</h3>
+    <form id="question-form" method="post" action="{% url 'procesar_respuesta' seccion_id=seccion.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="pregunta_id" value="{{ pregunta_actual.id }}">
+        
+        {% for respuesta in respuestas %}
+            <input type="radio" id="respuesta_{{ respuesta.id }}" name="respuesta" value="{{ respuesta.id }}">
+            <label for="respuesta_{{ respuesta.id }}">{{ respuesta.texto }}</label><br>
+        {% endfor %}
+        <br><br><br>
+        <center><button class="btn btn-secondary" type="submit">Siguiente</button></center>
+    </form>
+</div>
+
 
 <!-- Modal de advertencia -->
 <div class="modal fade" id="backWarningModal" tabindex="-1" aria-labelledby="backWarningModalLabel" aria-hidden="true">

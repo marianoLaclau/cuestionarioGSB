@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Seccion, Pregunta, Respuesta
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
+from .models import Seccion, Pregunta, Respuesta
 from .form import UserInfoForm
+
 
 def principal(request):
     if request.method == 'POST':
@@ -21,17 +22,13 @@ def principal(request):
 
 
 
-
-
 def home(request):
     return render(request, 'home.html')
 
 
 
-
 def final_cuestionario(request):
     return render(request, 'final_cuestionario.html', {})
-
 
 
 
@@ -47,7 +44,6 @@ def renderizar_pregunta(request, seccion_id, pregunta_id):
         'puntaje_total': request.session.get('puntaje_total', 0),
     }
     return render(request, 'seccion1.html', context)
-
 
 
 
@@ -110,10 +106,8 @@ def enviar_email(request):
         request.session['dni'] = ''
         request.session.modified = True
         
-        
         # Redirigir a la página de inicio o una página de confirmación
         return redirect('principal')  
-
 
 
 
