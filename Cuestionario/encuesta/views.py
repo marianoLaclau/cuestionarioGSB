@@ -38,11 +38,12 @@ def final_cuestionario(request):
 def renderizar_pregunta(request, seccion_id, pregunta_id):
     seccion = get_object_or_404(Seccion, pk=seccion_id)
     pregunta_actual = get_object_or_404(Pregunta, pk=pregunta_id)
-
+    respuestas = pregunta_actual.respuesta_set.all()
+    
     context = {
         'seccion': seccion,
         'pregunta_actual': pregunta_actual,
-        'respuestas': pregunta_actual.respuesta_set.all(),
+        'respuestas': respuestas,
         'puntaje_total': request.session.get('puntaje_total', 0),
     }
     return render(request, 'seccion1.html', context)

@@ -16,23 +16,25 @@
     {% endfor %}
 {% endif %}
 
-
-
-<div class="form-contenedor">
-    
-    <form id="question-form" method="post" action="{% url 'procesar_respuesta' seccion_id=seccion.id %}">
-        {% csrf_token %}
-        <input type="hidden" name="pregunta_id" value="{{ pregunta_actual.id }}">
-        
-        {% for respuesta in respuestas %}
-            <input type="radio" id="respuesta_{{ respuesta.id }}" name="respuesta" value="{{ respuesta.id }}">
-            <label for="respuesta_{{ respuesta.id }}">{{ respuesta.texto }}</label><br>
-        {% endfor %}
-        <br><br><br>
-        <center><button class="btn btn-secondary" type="submit">Siguiente</button></center>
-    </form>
-</div>
-
+{% if pregunta_actual %}
+    <div class="form-contenedor">
+        <h3>{{ pregunta_actual.texto }}</h3>
+        <form id="question-form" method="post" action="{% url 'procesar_respuesta' seccion_id=seccion.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="pregunta_id" value="{{ pregunta_actual.id }}">
+            
+            {% for respuesta in respuestas %}
+                <input type="radio" id="respuesta_{{ respuesta.id }}" name="respuesta" value="{{ respuesta.id }}">
+                <label for="respuesta_{{ respuesta.id }}">{{ respuesta.texto }}</label><br>
+            {% endfor %}
+            <br><br><br>
+            <center><button class="btn btn-secondary" type="submit">Siguiente</button></center>
+        </form>
+    </div>
+{% else %}
+    <p>¡Has completado todas las preguntas!</p>
+    <p>Puntaje total: {{ puntaje_total }}</p>
+{% endif %}
 
 <!-- Modal de advertencia -->
 <div class="modal fade" id="backWarningModal" tabindex="-1" aria-labelledby="backWarningModalLabel" aria-hidden="true">
@@ -57,28 +59,27 @@
         // Push initial state to history
         window.history.pushState({noBackExitsApp: true}, "");
 
-        // Listen for popstate event to detect back navigation
+        // Handle popstate event to detect back navigation
         window.addEventListener("popstate", function(event) {
-            // Check if the popstate event has a custom property
-            if (event.state && event.state.noBackExitsApp) {
-                // Show modal
-                var modal = new bootstrap.Modal(document.getElementById('backWarningModal'));
-                modal.show();
-                // Re-push state to prevent navigation
-                window.history.pushState({noBackExitsApp: true}, "");
-            }
+            // Show modal if popstate event is detected
+            var modal = new bootstrap.Modal(document.getElementById('backWarningModal'));
+            modal.show();
+            // Re-push state to prevent navigation
+            window.history.pushState({noBackExitsApp: true}, "");
         });
 
-        // Prevent back navigation on initial load
+        // Ensure popstate is triggered on initial load
         window.addEventListener("load", function() {
+            window.history.pushState({noBackExitsApp: true}, "");
+        });
+
+        // Handle form submission to push a new state
+        document.getElementById("question-form").addEventListener("submit", function() {
             window.history.pushState({noBackExitsApp: true}, "");
         });
     })();
 </script>
 
 {% endblock %}
-
-
-
 
 
