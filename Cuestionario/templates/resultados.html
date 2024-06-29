@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h4 style="color: #333333;">Resultados de: {{nombre}} {{apellido}} . DNI: {{dni}}</h4>
+
+        <!-- Sección 1 -->
+        <div style="margin-bottom: 20px; padding: 20px; border: 1px solid #e3e3e3; border-radius: 5px; background-color: #f9f9f9;">
+            <h3 style="color: #333333;">Sección 1: Habilidades Cognitivas</h3>
+            <p>Puntaje: {{ puntajes_secciones.seccion1 }}/15</p>
+            {% if puntajes_secciones.seccion1 >= 13 and puntajes_secciones.seccion1 <= 15 %}
+                <p>Tiene habilidades cognitivas muy desarrolladas. Es excelente resolviendo problemas, manejando la presión, organizando su tiempo y adaptándote a los cambios.</p>
+            {% elif puntajes_secciones.seccion1 >= 10 and puntajes_secciones.seccion1 <= 12 %}
+                <p>Tiene habilidades cognitivas bien desarrolladas. Maneja bien la mayoría de las situaciones, aunque podría mejorar en algunos aspectos.</p>
+            {% elif puntajes_secciones.seccion1 >= 5 and puntajes_secciones.seccion1 <= 9 %}
+                <p>Podría beneficiarse de mejorar sus habilidades cognitivas. Considerar trabajar en la resolución de problemas, la gestión del tiempo y la adaptación a cambios.</p>
+            {% else %}
+                <p>No se ha podido categorizar tu puntaje en esta sección.</p>
+            {% endif %}
+        </div>
+
+        <!-- Sección 2 -->
+        <div style="margin-bottom: 20px; padding: 20px; border: 1px solid #e3e3e3; border-radius: 5px; background-color: #f9f9f9;">
+            <h3 style="color: #333333;">Sección 2: Habilidades Interpersonales</h3>
+            <p>Puntaje: {{ puntajes_secciones.seccion2 }}/15</p>
+            {% if puntajes_secciones.seccion2 >= 13 and puntajes_secciones.seccion2 <= 15 %}
+                <p>Es muy habilidoso en interacciones interpersonales. Colabora bien, maneja conflictos de manera constructiva y valora las relaciones </p>
+            {% elif puntajes_secciones.seccion2 >= 10 and puntajes_secciones.seccion2 <= 12 %}
+                <p>Tiene buenas habilidades interpersonales. Puede trabajar bien en equipo y manejar conflictos, aunque podría mejorar en algunos aspectos.</p>
+            {% elif puntajes_secciones.seccion2 >= 5 and puntajes_secciones.seccion2 <= 9 %}
+                <p>Podría mejorar sus habilidades interpersonales. Considerar trabajar en la colaboración, la comunicación y la gestión de conflictos.</p>
+            {% else %}
+                <p>No se ha podido categorizar tu puntaje en esta sección.</p>
+            {% endif %}
+        </div>
+
+        <!-- Sección 3 -->
+        <div style="margin-bottom: 20px; padding: 20px; border: 1px solid #e3e3e3; border-radius: 5px; background-color: #f9f9f9;">
+            <h3 style="color: #333333;">Sección 3: Rasgos de Personalidad</h3>
+            <p>Puntaje: {{ puntajes_secciones.seccion3 }}/15</p>
+            {% if puntajes_secciones.seccion3 >= 13 and puntajes_secciones.seccion3 <= 15 %}
+                <p>Tiene rasgos de personalidad muy positivos para el entorno laboral. Es enérgico, meticuloso, maneja bien el estrés y es proactivo.</p>
+            {% elif puntajes_secciones.seccion3 >= 10 and puntajes_secciones.seccion3 <= 12 %}
+                <p>Tiene buenos rasgos de personalidad. Maneja bien el estrés y es meticuloso, aunque podría ser más proactivo y enérgico.</p>
+            {% elif puntajes_secciones.seccion3 >= 5 and puntajes_secciones.seccion3 <= 9 %}
+                <p>Podría trabajar en algunos rasgos de su personalidad. Considerar mejorar su manejo del estrés, su nivel de energía y su proactividad.</p>
+            {% else %}
+                <p>No se ha podido categorizar tu puntaje en esta sección.</p>
+            {% endif %}
+        </div>
+
+        <!-- Sección 4 -->
+        <div style="margin-bottom: 20px; padding: 20px; border: 1px solid #e3e3e3; border-radius: 5px; background-color: #f9f9f9;">
+            <h3 style="color: #333333;">Sección 4: Competencias Laborales</h3>
+            <p>Puntaje: {{ puntajes_secciones.seccion4 }}/15</p>
+            {% if puntajes_secciones.seccion4 >= 13 and puntajes_secciones.seccion4 <= 15 %}
+                <p>Es muy competente en el entorno laboral. Maneja bien las tecnologías, valora el desarrollo profesional y es eficiente en sus tareas.</p>
+            {% elif puntajes_secciones.seccion4 >= 10 and puntajes_secciones.seccion4 <= 12 %}
+                <p>Tien buenas competencias laborales. Maneja bien las tecnologías y es eficiente, aunque podría mejorar en algunas áreas.</p>
+            {% elif puntajes_secciones.seccion4 >= 5 and puntajes_secciones.seccion4 <= 9 %}
+                <p>Podría mejorar sus competencias laborales. Considerar trabajar en la adopción de nuevas tecnologías y en su eficiencia en el trabajo.</p>
+            {% else %}
+                <p>No se ha podido categorizar tu puntaje en esta sección.</p>
+            {% endif %}
+        </div>
+
+        <!-- Sección 5 -->
+        <div style="margin-bottom: 20px; padding: 20px; border: 1px solid #e3e3e3; border-radius: 5px; background-color: #f9f9f9;">
+            <h3 style="color: #333333;">Sección 5: Motivaciones y Valores</h3>
+            <p>Puntaje: {{ puntajes_secciones.seccion5 }}/15</p>
+            {% if puntajes_secciones.seccion5 >= 13 and puntajes_secciones.seccion5 <= 15 %}
+                <p>Tiene motivaciones y valores muy alineados con el éxito laboral. Valora el reconocimiento, el desarrollo personal y el equilibrio entre la vida laboral y personal.</p>
+            {% elif puntajes_secciones.seccion5 >= 10 and puntajes_secciones.seccion5 <= 12 %}
+                <p>Tiene buenas motivaciones y valores. Valora el reconocimiento y el desarrollo personal, aunque podría mejorar en algunos aspectos.</p>
+            {% elif puntajes_secciones.seccion5 >= 5 and puntajes_secciones.seccion5 <= 9 %}
+                <p>Podría trabajar en sus motivaciones y valores. Considerar enfocarse más en el desarrollo personal y en equilibrar su vida laboral y personal.</p>
+            {% else %}
+                <p>No se ha podido categorizar tu puntaje en esta sección.</p>
+            {% endif %}
+        </div>
+
+        <!-- Sección 6 -->
+        <div style="margin-bottom: 20px; padding: 20px; border: 1px solid #e3e3e3; border-radius: 5px; background-color: #f9f9f9;">
+            <h3 style="color: #333333;">Sección 6: Adaptabilidad y Flexibilidad</h3>
+            <p>Puntaje: {{ puntajes_secciones.seccion6 }}/15</p>
+            {% if puntajes_secciones.seccion6 >= 13 and puntajes_secciones.seccion6 <= 15 %}
+                <p>Es muy adaptable y flexible. Se adapta bien a los cambios, está dispuesto a aprender nuevas habilidades y maneja bien la multitarea.</p>
+            {% elif puntajes_secciones.seccion6 >= 10 and puntajes_secciones.seccion6 <= 12 %}
+                <p>Tiene buena adaptabilidad y flexibilidad. Se adaptas bien a los cambios y maneja bien la multitarea, aunque podría mejorar en algunos aspectos.</p>
+            {% elif puntajes_secciones.seccion6 >= 5 and puntajes_secciones.seccion6 <= 9 %}
+                <p>Podría trabajar en su adaptabilidad y flexibilidad. Considerar estar más abierto a aprender nuevas habilidades y mejorar su manejo de la multitarea.</p>
+            {% else %}
+                <p>No se ha podido categorizar tu puntaje en esta sección.</p>
+            {% endif %}
+        </div>
+
+        <!-- Puntaje Total -->
+        <div style="margin-top: 30px; padding: 20px; border: 2px solid #007bff; border-radius: 5px; background-color: #e9ecef;">
+            <h2 style="color: #333333;">Puntaje total obtenido: {{ puntajes_secciones.puntaje_total }}/90</h2>
+            {% if puntajes_secciones.puntaje_total >= 78 and puntaje_total <= 90 %}
+                <p>Es un candidato excepcional con habilidades, rasgos de personalidad y competencias muy bien desarrolladas. Es adaptable, proactivo y trabaja bien en equipo.</p>
+            {% elif puntajes_secciones.puntaje_total >= 60 and puntaje_total <= 77 %}
+                <p>Es un buen candidato con habilidades sólidas y buenas competencias laborales. Podría mejorar en algunas áreas para alcanzar su máximo potencial.</p>
+            {% elif puntajes_secciones.puntaje_total >= 30 and puntaje_total <= 59 %}
+                <p>Tiene potencial, pero podría beneficiarse de trabajar en varias áreas clave. Considerar enfocarte en el desarrollo de sus habilidades cognitivas, interpersonales y laborales.</p>
+            {% else %}
+                <p>No se ha podido categorizar tu puntaje total.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

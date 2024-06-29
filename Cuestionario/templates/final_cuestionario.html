@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} Cuestionario Finalizado {% endblock %}
+
+{% block content %}
+
+<div class="contenedor-final">
+    <br><br><br><br><br>
+    <h1 class="final-cuestionario">¡Has completado todas las preguntas!</h1><br>
+    <h3>Gracias por tu tiempo</h3>
+    <br><br>
+    <form method="post" action="{% url 'finalizar_cuestionario' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-lg btn-secondary">Finalizar</button>
+    </form>
+</div>
+
+{% endblock %}

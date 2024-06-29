@@ -1,0 +1,104 @@
+body{
+    background-color: #f3f3f3;
+    position: relative;
+}
+
+
+.titulo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1% 0;
+    background-color: #3d5675;
+}
+
+#titulo-item {
+    width: fit-content;
+    margin: 2% 5%;
+    color: white;
+}
+
+.form-contenedor{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.form-contenedor > h3{
+    margin: 2%;
+}
+
+
+.form-contenedor > form > label{
+    font-size:x-large;
+}
+
+
+
+.footer-base {
+    width: 100%;
+    position: fixed; 
+    bottom: 0;
+    text-align: center;
+    color: rgb(182, 182, 182);
+    padding: 10px 0;
+    margin-top: 8%;
+    background-color: #3d5675;
+}
+
+.footer-base > h6{
+    font-size: small;
+}
+
+
+.resultado{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 4% auto;
+}
+
+.resultado > p{
+    font-size: x-large;
+    
+}
+
+
+.contenedor-final{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.container{
+    margin-bottom: 10%;
+}
+
+
+.alerta-mensaje{
+    position: fixed;
+    width: 40%;
+    top: 20%;
+    left: 35%;
+}
+
+.container-form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.btn-form-inicio{
+    margin-left: 30%;
+}
+
+

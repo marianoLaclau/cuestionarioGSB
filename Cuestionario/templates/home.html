@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %} Inicio - TalentView {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="text-center mt-5">
+                <p class="lead"><strong>Te recordamos que no hay respuestas correctas o incorrectas. Queremos conocerte tal como eres.</strong></p>
+                <p class="lead"><strong>Responde con sinceridad y honestidad para que podamos entender mejor tus habilidades y potencial.</strong></p>
+                <p class="lead"><strong><em>Importante: una vez iniciado el cuestionario,tus respuestas se guardarán automaticamente y ya no podras volver a la pantalla anterior.</em></strong></p><br>
+                <p class="lead"><strong>¡Cuando te sientas listo , comenzá!</strong></p>
+                <a href="{% url 'renderizar_pregunta' seccion_id=1 pregunta_id=1 %}" class="btn btn-secondary mt-4">Comenzar el Cuestionario</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

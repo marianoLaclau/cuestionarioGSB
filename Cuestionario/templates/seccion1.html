@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Pregunta{% endblock %}
+
+{% block content %}
+<br><br>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alerta-mensaje">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+<div class="form-contenedor">
+    
+    <form id="question-form" method="post" action="{% url 'procesar_respuesta' seccion_id=seccion.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="pregunta_id" value="{{ pregunta_actual.id }}">
+        
+        {% for respuesta in respuestas %}
+            <input type="radio" id="respuesta_{{ respuesta.id }}" name="respuesta" value="{{ respuesta.id }}">
+            <label for="respuesta_{{ respuesta.id }}">{{ respuesta.texto }}</label><br>
+        {% endfor %}
+        <br><br><br>
+        <center><button class="btn btn-secondary" type="submit">Siguiente</button></center>
+    </form>
+</div>
+
+
+<!-- Modal de advertencia -->
+<div class="modal fade" id="backWarningModal" tabindex="-1" aria-labelledby="backWarningModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="backWarningModalLabel">Advertencia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                No puedes volver atrás una vez enviada la respuesta.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Push initial state to history
+        window.history.pushState({noBackExitsApp: true}, "");
+
+        // Listen for popstate event to detect back navigation
+        window.addEventListener("popstate", function(event) {
+            // Check if the popstate event has a custom property
+            if (event.state && event.state.noBackExitsApp) {
+                // Show modal
+                var modal = new bootstrap.Modal(document.getElementById('backWarningModal'));
+                modal.show();
+                // Re-push state to prevent navigation
+                window.history.pushState({noBackExitsApp: true}, "");
+            }
+        });
+
+        // Prevent back navigation on initial load
+        window.addEventListener("load", function() {
+            window.history.pushState({noBackExitsApp: true}, "");
+        });
+    })();
+</script>
+
+{% endblock %}
+
+
+
+
+
