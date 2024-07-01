@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from .models import Seccion, Pregunta, Respuesta
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
-from .models import Seccion, Pregunta, Respuesta
 from .form import UserInfoForm
+
 
 
 def principal(request):
@@ -35,12 +36,11 @@ def final_cuestionario(request):
 def renderizar_pregunta(request, seccion_id, pregunta_id):
     seccion = get_object_or_404(Seccion, pk=seccion_id)
     pregunta_actual = get_object_or_404(Pregunta, pk=pregunta_id)
-    respuestas = pregunta_actual.respuesta_set.all()
-    
+
     context = {
         'seccion': seccion,
         'pregunta_actual': pregunta_actual,
-        'respuestas': respuestas,
+        'respuestas': pregunta_actual.respuesta_set.all(),
         'puntaje_total': request.session.get('puntaje_total', 0),
     }
     return render(request, 'seccion1.html', context)
@@ -67,7 +67,6 @@ def enviar_resultados_por_correo(puntajes_secciones, puntaje_total, destinatario
 
 
 
-
 def enviar_email(request):
     if request.method == 'POST':
         # Obtener los puntajes de las secciones y el puntaje total desde la sesión
@@ -78,18 +77,25 @@ def enviar_email(request):
             'seccion4': 0,
             'seccion5': 0,
             'seccion6': 0,
+            'seccion7_respuestas': {
+                'pregunta31': 0,
+                'pregunta32': 0,
+                'pregunta33': 0,
+                'pregunta34': 0,
+            },
         })
         puntaje_total = request.session.get('puntaje_total', 0)
 
         nombre = request.session.get('nombre', 'N/A')
         apellido = request.session.get('apellido', 'N/A')
         dni = request.session.get('dni', 'N/A')
-        
+
+    
         # Dirección de correo electrónico del destinatario
         destinatario = 'mlaclau@santabarbarasa.com.ar'
         
         # Enviar los resultados por correo electrónico
-        enviar_resultados_por_correo(puntajes_secciones, puntaje_total, destinatario,nombre,apellido,dni)
+        enviar_resultados_por_correo(puntajes_secciones, puntaje_total, destinatario, nombre, apellido, dni)
         
         # Resetear los valores en la sesión
         request.session['puntajes_secciones'] = {
@@ -99,6 +105,12 @@ def enviar_email(request):
             'seccion4': 0,
             'seccion5': 0,
             'seccion6': 0,
+            'seccion7_respuestas': {
+                'pregunta31': 0,
+                'pregunta32': 0,
+                'pregunta33': 0,
+                'pregunta34': 0,
+            },
         }
         request.session['puntaje_total'] = 0
         request.session['nombre'] = ''
@@ -107,7 +119,7 @@ def enviar_email(request):
         request.session.modified = True
         
         # Redirigir a la página de inicio o una página de confirmación
-        return redirect('principal')  
+        return redirect('principal')
 
 
 
@@ -120,20 +132,16 @@ def procesar_respuesta(request, seccion_id):
             pregunta_actual = get_object_or_404(Pregunta, pk=pregunta_id)
             respuesta = get_object_or_404(Respuesta, pk=respuesta_id)
 
-            # Inicializar el diccionario de respuestas en la sesión si no existe
             if 'respuestas' not in request.session:
                 request.session['respuestas'] = {}
 
-            # Guardar la puntuación de la respuesta actual
             request.session['respuestas'][pregunta_id] = respuesta.puntaje
 
-            # Inicializar los acumuladores de puntajes por sección si no existen
             if 'puntajes_secciones' not in request.session:
                 request.session['puntajes_secciones'] = {}
 
             puntajes_secciones = request.session['puntajes_secciones']
 
-            # Asegurarse de que cada clave de sección está inicializada
             if 'seccion1' not in puntajes_secciones:
                 puntajes_secciones['seccion1'] = 0
             if 'seccion2' not in puntajes_secciones:
@@ -149,7 +157,14 @@ def procesar_respuesta(request, seccion_id):
             if 'puntaje_total' not in puntajes_secciones:
                 puntajes_secciones['puntaje_total'] = 0
 
-            # Acumular el puntaje en la sección correspondiente
+            if 'seccion7_respuestas' not in puntajes_secciones:
+                puntajes_secciones['seccion7_respuestas'] = {
+                    'pregunta31': 0,
+                    'pregunta32': 0,
+                    'pregunta33': 0,
+                    'pregunta34': 0,
+                }
+
             if seccion_id == 1:
                 puntajes_secciones['seccion1'] += respuesta.puntaje
             elif seccion_id == 2:
@@ -162,15 +177,22 @@ def procesar_respuesta(request, seccion_id):
                 puntajes_secciones['seccion5'] += respuesta.puntaje
             elif seccion_id == 6:
                 puntajes_secciones['seccion6'] += respuesta.puntaje
+            elif seccion_id == 7:
+                if pregunta_id == '31':
+                    puntajes_secciones['seccion7_respuestas']['pregunta31'] = respuesta.puntaje
+                elif pregunta_id == '32':
+                    puntajes_secciones['seccion7_respuestas']['pregunta32'] = respuesta.puntaje
+                elif pregunta_id == '33':
+                    puntajes_secciones['seccion7_respuestas']['pregunta33'] = respuesta.puntaje
+                elif pregunta_id == '34':
+                    puntajes_secciones['seccion7_respuestas']['pregunta34'] = respuesta.puntaje
 
             puntajes_secciones['puntaje_total'] = puntajes_secciones['seccion1'] + puntajes_secciones['seccion2'] + puntajes_secciones['seccion3'] + puntajes_secciones['seccion4'] + puntajes_secciones['seccion5'] + puntajes_secciones['seccion6']              
 
-            # Guardar el diccionario actualizado en la sesión
             request.session['puntajes_secciones'] = puntajes_secciones
             request.session.modified = True
 
-            # Verificar el estado de la sesión
-            print(f'Sesión actualizada: {request.session["puntajes_secciones"]}')
+            print(f'Sesión actualizada: {request.session["puntajes_secciones"]}')  # Verificar estado de la sesion
 
             seccion = get_object_or_404(Seccion, pk=seccion_id)
             siguiente_pregunta = Pregunta.objects.filter(seccion=seccion, id__gt=pregunta_actual.id).order_by('id').first()
@@ -188,13 +210,3 @@ def procesar_respuesta(request, seccion_id):
         messages.error(request, "Debe seleccionar una respuesta para poder avanzar.")
     
     return redirect('renderizar_pregunta', seccion_id=seccion_id, pregunta_id=pregunta_id)
-
-
-
-
-
-
-
-
-
-

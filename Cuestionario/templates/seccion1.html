@@ -17,6 +17,27 @@
 {% endif %}
 
 
+{% if seccion.id == 7 %}
+            <center><h3>Observa la imagen detenidamente y elige la opcion que mas se acerque a tu interpretacion.</h3></center>
+            {% if pregunta_actual.id == 31 %}
+            <center><div class="image-container">
+                    <img src="https://pymstatic.com/3039/conversions/rorschach-dibujo-default.jpg" alt="Imagen 1">
+                </div></center>
+            {% elif pregunta_actual.id == 32 %}
+            <center><div class="image-container">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Rorschach1.jpg" alt="Imagen 2">
+                </div></center>
+                {% elif pregunta_actual.id == 33 %}
+                <center><div class="image-container">
+                    <img src="https://www.swissinfo.ch/content/wp-content/uploads/sites/13/2021/03/d053169f1e5e34a5c55112486a816ac3-87642114_highres-data.jpg" alt="Imagen 3">
+                </div></center>
+            {% elif pregunta_actual.id == 34 %}
+            <center><div class="image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Rorschach_blot_06.jpg" alt="Imagen 4">
+            </div></center>
+            {% endif %}
+        {% endif %}
+
 
 <div class="form-contenedor">
     <h3>{{ pregunta_actual.texto }}</h3>
@@ -29,7 +50,8 @@
             <label for="respuesta_{{ respuesta.id }}">{{ respuesta.texto }}</label><br>
         {% endfor %}
         <br><br><br>
-        <center><button class="btn btn-secondary" type="submit">Siguiente</button></center>
+        <center><button class="btn btn-lg btn-secondary" type="submit">Siguiente</button></center>
+        <br><br><br><br><br>
     </form>
 </div>
 
@@ -57,27 +79,28 @@
         // Push initial state to history
         window.history.pushState({noBackExitsApp: true}, "");
 
-        // Handle popstate event to detect back navigation
+        // Listen for popstate event to detect back navigation
         window.addEventListener("popstate", function(event) {
-            // Show modal if popstate event is detected
-            var modal = new bootstrap.Modal(document.getElementById('backWarningModal'));
-            modal.show();
-            // Re-push state to prevent navigation
-            window.history.pushState({noBackExitsApp: true}, "");
+            // Check if the popstate event has a custom property
+            if (event.state && event.state.noBackExitsApp) {
+                // Show modal
+                var modal = new bootstrap.Modal(document.getElementById('backWarningModal'));
+                modal.show();
+                // Re-push state to prevent navigation
+                window.history.pushState({noBackExitsApp: true}, "");
+            }
         });
 
-        // Ensure popstate is triggered on initial load
+        // Prevent back navigation on initial load
         window.addEventListener("load", function() {
-            window.history.pushState({noBackExitsApp: true}, "");
-        });
-
-        // Handle form submission to push a new state
-        document.getElementById("question-form").addEventListener("submit", function() {
             window.history.pushState({noBackExitsApp: true}, "");
         });
     })();
 </script>
 
 {% endblock %}
+
+
+
 
 

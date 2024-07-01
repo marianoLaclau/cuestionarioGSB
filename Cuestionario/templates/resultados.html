@@ -99,19 +99,72 @@
             {% endif %}
         </div>
 
-        <!-- Puntaje Total -->
-        <div style="margin-top: 30px; padding: 20px; border: 2px solid #007bff; border-radius: 5px; background-color: #e9ecef;">
-            <h2 style="color: #333333;">Puntaje total obtenido: {{ puntajes_secciones.puntaje_total }}/90</h2>
-            {% if puntajes_secciones.puntaje_total >= 78 and puntaje_total <= 90 %}
-                <p>Es un candidato excepcional con habilidades, rasgos de personalidad y competencias muy bien desarrolladas. Es adaptable, proactivo y trabaja bien en equipo.</p>
-            {% elif puntajes_secciones.puntaje_total >= 60 and puntaje_total <= 77 %}
-                <p>Es un buen candidato con habilidades sólidas y buenas competencias laborales. Podría mejorar en algunas áreas para alcanzar su máximo potencial.</p>
-            {% elif puntajes_secciones.puntaje_total >= 30 and puntaje_total <= 59 %}
-                <p>Tiene potencial, pero podría beneficiarse de trabajar en varias áreas clave. Considerar enfocarte en el desarrollo de sus habilidades cognitivas, interpersonales y laborales.</p>
-            {% else %}
-                <p>No se ha podido categorizar tu puntaje total.</p>
+        <!-- Test de Rorschach -->
+        <div style="margin-bottom: 20px; padding: 20px; border: 1px solid #e3e3e3; border-radius: 5px; background-color: #f9f9f9;">
+            <h3 style="color: #333333;">Sección 7: Test de Rorschach</h3>
+            <p>Descripcion segun respuestas:</p>
+            {% if puntajes_secciones.seccion7_respuestas %}
+                <h4>Imagen 1 | Eleccion: {{ puntajes_secciones.seccion7_respuestas.pregunta31 }}</h4>
+                {% if puntajes_secciones.seccion7_respuestas.pregunta31 == 4 %}
+                    <p>Esta respuesta puede indicar que eres una persona con una visión dual de las situaciones. Tiendes a ver ambos lados de un conflicto y eres capaz de empatizar con diferentes perspectivas. Tienes una fuerte capacidad de análisis y equilibrio.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta31 == 3 %}
+                    <p>Ver una mariposa puede sugerir que eres alguien con una apreciación por la belleza y la transformación. Valoras el crecimiento personal y los cambios positivos en tu vida. Tienes una naturaleza optimista y un enfoque creativo hacia los desafíos.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta31 == 2 %}
+                    <p>Si ves una cara o una máscara, podría indicar que tienes un fuerte sentido de identidad y auto-reflexión. Eres consciente de cómo te presentas a los demás y puedes ser introspectivo. A veces, puedes mantener tus verdaderos sentimientos ocultos.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta31 == 1 %}
+                    <p>Esta interpretación puede sugerir que tienes una mente analítica y perceptiva. Eres capaz de detectar detalles que otros pueden pasar por alto y te adaptas bien a las situaciones oscuras o inciertas. También puedes ser una persona nocturna y disfrutar de la tranquilidad de la noche.</p>
+                {% endif %}
+                
+                <h4>Imagen 2 | Eleccion: {{ puntajes_secciones.seccion7_respuestas.pregunta32 }}</h4>
+                {% if puntajes_secciones.seccion7_respuestas.pregunta32 == 4 %}
+                    <p>Esta respuesta puede indicar que eres una persona fuerte y con una gran presencia. Valoras la estabilidad y la fuerza, tanto en ti mismo como en los demás. Tienes un enfoque pragmático y te enfrentas a los desafíos de manera directa y decidida.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta32 == 3 %}
+                    <p>Ver un candelabro puede sugerir que tienes una mente luminosa y esclarecedora. Eres una persona que busca la verdad y valora la claridad en todas las cosas. Tienes una fuerte intuición y eres capaz de iluminar situaciones complicadas con tu perspicacia.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta32 == 2 %}
+                    <p>Si ves un altar, esto puede indicar que eres alguien que valora la espiritualidad y la introspección. Tienes una profunda conexión con tus creencias y principios. Eres reflexivo y tiendes a buscar significado en las experiencias de la vida.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta32 == 1 %}
+                    <p>Esta interpretación puede sugerir que eres una persona resiliente y capaz de adaptarte a las adversidades. Valoras la transformación y el renacimiento, y tienes una capacidad innata para superar obstáculos. Eres persistente y encuentras formas de prosperar en circunstancias difíciles.</p>
+                {% endif %}
+                
+                <h4>Imagen 3 | Eleccion: {{ puntajes_secciones.seccion7_respuestas.pregunta33 }}</h4>
+                {% if puntajes_secciones.seccion7_respuestas.pregunta33 == 4 %}
+                    <p>Ver un cangrejo puede sugerir que eres una persona protectora y con una fuerte intuición. Tienes una coraza exterior dura, pero eres sensible y emocional por dentro. Valoras la seguridad y tiendes a ser muy leal a tus amigos y familiares.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta33 == 3 %}
+                    <p>Esta respuesta puede indicar que eres alguien que se adapta bien a diferentes situaciones y roles. Eres flexible y capaz de ajustarte a las expectativas de los demás, aunque puedes sentirte manipulado a veces. Eres creativo y tienes una imaginación vívida.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta33 == 2 %}
+                    <p>Si ves dos figuras danzando, esto puede sugerir que tienes una naturaleza alegre y sociable. Disfrutas de la compañía de los demás y tienes una habilidad innata para traer alegría y energía a las situaciones. Eres expresivo y valoras la armonía en las relaciones.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta33 == 1 %}
+                    <p>Ver un insecto en vuelo puede indicar que eres una persona libre y que valora la independencia. Tienes una mente activa y estás siempre en movimiento, explorando nuevas ideas y experiencias. Eres curioso y adaptable, y te sientes cómodo en ambientes cambiantes.</p>
+                {% endif %}
+                
+                <h4>Imagen 4 | Eleccion: {{ puntajes_secciones.seccion7_respuestas.pregunta34 }}</h4>
+                {% if puntajes_secciones.seccion7_respuestas.pregunta34 == 4 %}
+                    <p>Ver dos caballos enfrentados puede indicar que eres una persona con una gran energía y vitalidad. Tienes una fuerte voluntad y determinación para superar los desafíos. Valoras la libertad y tiendes a ser muy independiente y resistente.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta34 == 3 %}
+                    <p>Si ves una máscara tribal, esto puede sugerir que tienes una conexión profunda con tus raíces y tradiciones. Eres introspectivo y valoras la autoexpresión y el simbolismo en tu vida. Tienes una fuerte identidad y te sientes cómodo explorando diferentes aspectos de ti mismo.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta34 == 2 %}
+                    <p>Ver una mariposa nocturna puede indicar que eres alguien que aprecia la belleza en lo oscuro y lo misterioso. Tienes una naturaleza introspectiva y a menudo encuentras significado en los aspectos menos obvios de la vida. Eres creativo y disfrutas de la soledad para reflexionar.</p>
+                {% elif puntajes_secciones.seccion7_respuestas.pregunta34 == 1 %}
+                    <p>Esta interpretación puede sugerir que eres una persona sociable y expresiva. Disfrutas de las interacciones con los demás y valoras la armonía en tus relaciones. Tienes una naturaleza alegre y puedes ser muy empático y comprensivo con los sentimientos de los demás.</p>
+                {% endif %}
             {% endif %}
         </div>
+        
+
+
+            <!-- Puntaje Total -->
+            <div style="margin-top: 30px; padding: 20px; border: 2px solid #007bff; border-radius: 5px; background-color: #e9ecef;">
+                <h2 style="color: #333333;">Puntaje total obtenido: {{ puntajes_secciones.puntaje_total }}/90</h2>
+                {% if puntajes_secciones.puntaje_total >= 78 and puntaje_total <= 90 %}
+                    <p>Es un candidato excepcional con habilidades, rasgos de personalidad y competencias muy bien desarrolladas. Es adaptable, proactivo y trabaja bien en equipo.</p>
+                {% elif puntajes_secciones.puntaje_total >= 60 and puntaje_total <= 77 %}
+                    <p>Es un buen candidato con habilidades sólidas y buenas competencias laborales. Podría mejorar en algunas áreas para alcanzar su máximo potencial.</p>
+                {% elif puntajes_secciones.puntaje_total >= 30 and puntaje_total <= 59 %}
+                    <p>Tiene potencial, pero podría beneficiarse de trabajar en varias áreas clave. Considerar enfocarte en el desarrollo de sus habilidades cognitivas, interpersonales y laborales.</p>
+                {% else %}
+                    <p>No se ha podido categorizar tu puntaje total.</p>
+                {% endif %}
+            </div>
     </div>
 </body>
 </html>
