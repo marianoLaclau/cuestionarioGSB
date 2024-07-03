@@ -25,9 +25,11 @@
         <input type="hidden" name="pregunta_id" value="{{ pregunta_actual.id }}">
         
         {% for respuesta in respuestas %}
+            <div class="form-response">
             <input type="radio" id="respuesta_{{ respuesta.id }}" name="respuesta" value="{{ respuesta.id }}">
             <label for="respuesta_{{ respuesta.id }}">{{ respuesta.texto }}</label><br>
-        {% endfor %}
+            </div>
+            {% endfor %}
         <br><br><br>
         <center><button class="btn btn-secondary" type="submit">Siguiente</button></center>
     </form>
