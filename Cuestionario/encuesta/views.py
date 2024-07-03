@@ -92,7 +92,7 @@ def enviar_email(request):
 
     
         # Dirección de correo electrónico del destinatario
-        destinatario = 'mlaclau@santabarbarasa.com.ar'
+        destinatario = 'mstraschnoy@santabarbarasa.com.ar'
         
         # Enviar los resultados por correo electrónico
         enviar_resultados_por_correo(puntajes_secciones, puntaje_total, destinatario, nombre, apellido, dni)
