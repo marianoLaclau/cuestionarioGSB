@@ -92,7 +92,7 @@ def enviar_email(request):
 
     
         # Dirección de correo electrónico del destinatario
-        destinatario = 'mstraschnoy@santabarbarasa.com.ar'
+        destinatario = 'mlaclau@santabarbarasa.com.ar'
         
         # Enviar los resultados por correo electrónico
         enviar_resultados_por_correo(puntajes_secciones, puntaje_total, destinatario, nombre, apellido, dni)
@@ -118,7 +118,7 @@ def enviar_email(request):
         request.session['dni'] = ''
         request.session.modified = True
         
-        # Redirigir a la página de inicio o una página de confirmación
+        # Redirigir a la página de inicio o una pagina de confirmación
         return redirect('principal')
 
 
