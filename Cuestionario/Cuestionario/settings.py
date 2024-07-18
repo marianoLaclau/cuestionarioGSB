@@ -126,4 +126,4 @@ EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'capacitaciones@grupomaipu.com.ar'
-EMAIL_HOST_PASSWORD = 'Grecia3422#@#'
+EMAIL_HOST_PASSWORD = ''
