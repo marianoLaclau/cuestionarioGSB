@@ -9,6 +9,8 @@ CuestionarioGSB es una aplicación web diseñada para evaluar candidatos a ingre
 * **Cuestionario Dinámico:** El cuestionario está dividido en varias secciones, cada una con varias preguntas.
 * **Almacenamiento en Sesión:** Las respuestas de los usuarios se almacenan en la sesión de Django durante la duración del cuestionario.
 * **Cálculo de Puntajes:** Se calcula un puntaje total basado en las respuestas del usuario.
+* **Resultados:** Los resultados no se muestran al usuario , son enviados por email a la persona indicada.
+
 
 ___
 Tecnologías Utilizadas:
